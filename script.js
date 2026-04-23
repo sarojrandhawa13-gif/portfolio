@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const subNavLinks = document.querySelectorAll('.dropdown-content a');
+    const pageNavLinks = document.querySelectorAll('.section-nav a');
     const footerLinks = document.querySelectorAll('.footer-links a');
     const goToTopBtn = document.getElementById('goToTop');
 
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     subNavLinks.forEach(bindSmoothScroll);
+    pageNavLinks.forEach(bindSmoothScroll);
     footerLinks.forEach(bindSmoothScroll);
 
     // Go to top button
