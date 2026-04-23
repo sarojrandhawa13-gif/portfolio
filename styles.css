@@ -14,7 +14,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #87A2FF;
     color: white;
     padding: 1rem 2rem;
     position: fixed;
@@ -48,7 +48,8 @@ nav {
 }
 
 .nav-link:hover, .nav-link.active {
-    background-color: #555;
+    background-color: #C4D7FF;
+    color: #555;
 }
 
 .dropdown {
@@ -58,7 +59,7 @@ nav {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #333;
+    background-color: #87A2FF;
     min-width: 200px;
     max-width: calc(100vw - 40px);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -76,7 +77,8 @@ nav {
 }
 
 .dropdown-content a:hover {
-    background-color: #555;
+    background-color: #C4D7FF;
+    color: #555;
 }
 
 .dropdown:hover .dropdown-content {
@@ -106,7 +108,7 @@ nav {
 }
 
 .section-nav a:hover {
-    background-color: #333;
+    background-color: #87A2FF;
     color: white;
 }
 
@@ -180,7 +182,7 @@ li {
 
 .pagination-btn {
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #87A2FF;
     color: white;
     border: none;
     border-radius: 5px;
@@ -190,7 +192,8 @@ li {
 }
 
 .pagination-btn:hover {
-    background-color: #555;
+    background-color: #C4D7FF;
+    color: #555;
 }
 
 .pagination-btn:disabled {
