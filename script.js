@@ -37,15 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 contextSections[pageIndex].classList.add('active');
                 console.log('Added active to section', pageIndex);
                 
-                // Scroll to the specific section
-                const headerOffset = 80;
-                const elementPosition = contextSections[pageIndex].getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                // Scroll to the specific section after layout update
+                setTimeout(() => {
+                    const headerOffset = 100;
+                    const elementPosition = contextSections[pageIndex].getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50);
             }
             
             currentPage = pageIndex;

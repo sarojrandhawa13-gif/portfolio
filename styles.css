@@ -284,3 +284,8 @@ a:hover {
     transform: translateY(-50%);
     color: #ccc;
 }
+.context-image{
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+}
