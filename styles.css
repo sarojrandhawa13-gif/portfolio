@@ -170,3 +170,32 @@ a:hover {
 #goToTop:hover {
     background-color: #555;
 }
+
+.section-footer {
+    background-color: #f7f7f7;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    margin-top: 2rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-links a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.footer-links a:hover {
+    background-color: #333;
+    color: white;
+}

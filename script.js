@@ -2,23 +2,26 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const subNavLinks = document.querySelectorAll('.dropdown-content a');
+    const footerLinks = document.querySelectorAll('.footer-links a');
     const goToTopBtn = document.getElementById('goToTop');
 
-    subNavLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href.startsWith('#')) {
+    const bindSmoothScroll = function(link) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
-                    // Add animate class immediately for animation
                     targetElement.classList.add('animate');
                 }
-            }
-        });
-    });
+            });
+        }
+    };
+
+    subNavLinks.forEach(bindSmoothScroll);
+    footerLinks.forEach(bindSmoothScroll);
 
     // Go to top button
     if (goToTopBtn) {
