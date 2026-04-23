@@ -71,8 +71,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Initialize pagination
-        showPage(0);
+        // Initialize pagination using a URL hash if one is present
+        const initialHash = window.location.hash;
+        let initialPage = 0;
+        if (initialHash) {
+            const initialAnchor = initialHash.substring(1);
+            const initialIndex = Array.from(contextSections).findIndex(section => section.id === initialAnchor);
+            if (initialIndex !== -1) {
+                initialPage = initialIndex;
+            }
+        }
+        showPage(initialPage);
         
         // Bind context dropdown links to navigate sections
         const contextDropdownLinks = document.querySelectorAll('header .dropdown-content a');
