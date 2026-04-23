@@ -37,11 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 contextSections[pageIndex].classList.add('active');
                 console.log('Added active to section', pageIndex);
                 
-                // Scroll to top of main content
-                const main = document.querySelector('main');
-                if (main) {
-                    main.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                // Scroll to the specific section
+                const headerOffset = 80;
+                const elementPosition = contextSections[pageIndex].getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             }
             
             currentPage = pageIndex;
@@ -83,32 +87,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         showPage(initialPage);
         
-        // Bind context dropdown links to navigate sections
+        // Bind context dropdown links to navigate sections (only for same-page links)
         const contextDropdownLinks = document.querySelectorAll('header .dropdown-content a');
         console.log('Found dropdown links:', contextDropdownLinks.length);
         
         contextDropdownLinks.forEach((link, idx) => {
             link.addEventListener('click', function(e) {
-                console.log('Dropdown link clicked:', idx, this.getAttribute('href'));
-                e.preventDefault();
                 const href = this.getAttribute('href');
-                // Extract the anchor ID from href (e.g., "#economic" or "reference.html#economic")
-                const anchorId = href.includes('#') ? href.substring(href.indexOf('#') + 1) : null;
+                console.log('Dropdown link clicked:', idx, href);
                 
-                console.log('Extracted anchor ID:', anchorId);
-                
-                if (anchorId) {
-                    const sectionIndex = Array.from(contextSections).findIndex(section => section.id === anchorId);
-                    console.log('Found section index:', sectionIndex);
-                    if (sectionIndex !== -1) {
-                        showPage(sectionIndex);
+                // Only handle same-page links (starting with #)
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const anchorId = href.substring(1);
+                    console.log('Extracted anchor ID:', anchorId);
+                    
+                    if (anchorId) {
+                        const sectionIndex = Array.from(contextSections).findIndex(section => section.id === anchorId);
+                        console.log('Found section index:', sectionIndex);
+                        if (sectionIndex !== -1) {
+                            showPage(sectionIndex);
+                        }
                     }
                 }
+                // For cross-page links (like reference.html#...), let the browser handle navigation
             });
         });
     } else {
         // Reference page - use smooth scroll for dropdown links
         const subNavLinks = document.querySelectorAll('.dropdown-content a');
+        
+        // Handle initial hash on page load
+        const initialHash = window.location.hash;
+        if (initialHash) {
+            const targetId = initialHash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                setTimeout(() => {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    targetElement.classList.add('animate');
+                }, 100); // Small delay to ensure page is fully loaded
+            }
+        }
         
         const bindSmoothScroll = function(link) {
             const href = link.getAttribute('href');
@@ -118,7 +145,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     const targetId = href.substring(1);
                     const targetElement = document.getElementById(targetId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
                         targetElement.classList.add('animate');
                     }
                 });
